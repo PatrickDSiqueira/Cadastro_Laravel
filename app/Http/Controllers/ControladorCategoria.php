@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Categoria;
 use Illuminate\Http\Request;
 
 class ControladorCategoria extends Controller
@@ -23,7 +24,7 @@ class ControladorCategoria extends Controller
      */
     public function create()
     {
-        //
+        return view('novacategoria');
     }
 
     /**
@@ -34,7 +35,9 @@ class ControladorCategoria extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $cat = new Categoria();
+        $cat -> name = $request ->input('nomeCategoria');
+        $cat -> save();
     }
 
     /**
