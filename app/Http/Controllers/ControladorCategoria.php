@@ -16,7 +16,7 @@ class ControladorCategoria extends Controller
     {
 
         $cats = Categoria::all();
-        return  view('categorias', compact("cats"));
+        return view('categorias', compact("cats"));
     }
 
     /**
@@ -32,21 +32,21 @@ class ControladorCategoria extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $cat = new Categoria();
-        $cat -> name = $request ->input('nomeCategoria');
-        $cat -> save();
+        $cat->name = $request->input('nomeCategoria');
+        $cat->save();
         return redirect('/categorias');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -57,38 +57,48 @@ class ControladorCategoria extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //
+        $cat = Categoria::find($id);
+        if (isset($cat)){
+            return view('editarcategoria', compact('cat'));
+        } else {
+            return redirect('/categorias');
+        }
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        //
+        $cat = Categoria::find($id);
+        if (isset($cat)){
+            $cat -> name = $request->input('nomeCategoria');
+            $cat -> save();
+        }
+        return redirect('categorias');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         $cat = Categoria::find($id);
 
-        if (isset($cat)){
-            $cat -> delete();
+        if (isset($cat)) {
+            $cat->delete();
         }
 
         return redirect('/categorias');
