@@ -19,8 +19,8 @@
                             <td>{{$cat->id}}</td>
                             <td>{{$cat->name}}</td>
                             <td>
-                                <a href="/categorias/editar{{$cat->id}}" class="btn btn-sm btn-primary">Editar</a>
-                                <a href="/categorias/apagar{{$cat->id}}" class="btn btn-sm btn-danger">Deletar</a>
+                                <a href="/categorias/editar/{{$cat->id}}" class="btn btn-sm btn-primary">Editar</a>
+                                <a href="/categorias/apagar/{{$cat->id}}" class="btn btn-sm btn-danger">Deletar</a>
                             </td>
                         </tr>
                     @endforeach

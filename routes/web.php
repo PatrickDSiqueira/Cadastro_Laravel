@@ -19,3 +19,4 @@ Route::get('/produtos', 'ControladorProduto@index');
 Route::get('/categorias','ControladorCategoria@index');
 Route::get('/categorias/novo','ControladorCategoria@create');
 Route::post('categorias','ControladorCategoria@store');
+Route::get('categorias/apagar/{id}', 'ControladorCategoria@destroy');
