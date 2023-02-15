@@ -41,7 +41,6 @@ class ControladorProduto extends Controller
      */
     public function store(Request $request)
     {
-        dd("teste");
         $categoriaModel = new Categoria();
         $nameCategoria = $request->input("selecaoCategoria");
 
