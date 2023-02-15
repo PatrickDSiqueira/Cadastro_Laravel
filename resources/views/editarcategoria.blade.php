@@ -8,11 +8,10 @@
                 @csrf
                 <div class="form-group">
                     <label for="nomeCategoria">Nome da Categoria</label>
-                    <input class="form-control" type="text" name="nomeCategoria" id="nomeCategoria"
-                           placeholder="Categoria" value="{{$cat -> name}}"/>
+                    <input class="form-control" type="text" name="nomeCategoria" id="nomeCategoria" placeholder="Categoria" value="{{$cat -> name}}"/>
                 </div>
                 <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
-                <button type="cancel" class="btn btn-danger btn-sm">Cancelar</button>
+                <a type="cancel" class="btn btn-danger btn-sm" href="/categorias">Cancelar</a>
             </form>
 
         </div>
