@@ -18,16 +18,16 @@
             @endif
         </div>
         <div class="card-footer">
-            <button href="/produtos/novo" class="btn btn-sm btn-primary" role="button" onclick="">Novo Produto</button>
+            <button href="/produtos/novo" class="btn btn-sm btn-primary" role="button" onclick="novoProduto()">Novo Produto</button>
         </div>
     </div>
 
-    <div class="modal" role="dialog" tabindex="-1" id="dlgProdutos" >
+    <div class="modal" role="dialog" tabindex="-1" id="dlgProdutos">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <form class="form-horizontal" id="formProduto">
                     <div class="modal-header">
-                    <h5 class="modal-title">Novo Produto</h5>
+                        <h5 class="modal-title">Novo Produto</h5>
                     </div>
                     <div class="modal-body">
                         <input type="hidden" class="form-control" id="id">
@@ -40,31 +40,44 @@
                         <div class="form-group">
                             <label for="precoProduto" class="control-label">Preco do Produto</label>
                             <div class="input-group">
-                                <input type="number" class="form-control" id="precoProduto" placeholder="Preco do Produto">
+                                <input type="number" class="form-control" id="precoProduto"
+                                       placeholder="Preco do Produto">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="quantidadeProduto" class="control-label">Quantidade do Produto</label>
                             <div class="input-group">
-                                <input type="number" class="form-control" id="quantidadeProduto" placeholder="Quantidade do Produto">
+                                <input type="number" class="form-control" id="quantidadeProduto"
+                                       placeholder="Quantidade do Produto">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="categoriaProduto" class="control-label">Categoria do Produto</label>
                             <div class="input-group">
-                                <select type="text" class="form-control" id="categoriaProduto" name="categoriaProduto" placeholder="Categoria do Produto">
-
+                                <select type="text" class="form-control" id="categoriaProduto" name="categoriaProduto"
+                                        placeholder="Categoria do Produto">
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary btn">Salvar</button>
-                        <button type="cancel" class="btn btn-secondary btn" >Cancelar</button>
+                        <button type="cancel" class="btn btn-secondary btn">Cancelar</button>
                     </div>
                 </form>
             </div>
-
         </div>
     </div>
+@endsection
+@section('javascript')
+    <script>
+        function novoProduto(){
+            $('#categoriaProduto').val('')
+            $('#quantidadeProduto').val('')
+            $('#precoProduto').val('')
+            $('#id').val('')
+            $('#nomeProduto').val('')
+            $('#dlgProdutos').modal('show')
+        }
+    </script>
 @endsection
