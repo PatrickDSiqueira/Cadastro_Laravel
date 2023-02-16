@@ -7,6 +7,7 @@
                 <table class="table table-bordered table-hover" id="tabelaProdutos">
                     <thead>
                     <tr>
+                        <th>Código</th>
                         <th>Nome</th>
                         <th>Estoque</th>
                         <th>Preço</th>
@@ -110,6 +111,7 @@
 
         function montarLinha(produto) {
             var linha = "<tr>" +
+                "<td>" + produto.id + "</td>" +
                 "<td>" + produto.nome + "</td>" +
                 "<td>" + produto.estoque + "</td>" +
                 "<td>" + produto.preco + "</td>" +
