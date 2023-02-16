@@ -4,7 +4,7 @@
         <div class="card-body">
             <h5>Cadastro de Produtos</h5>
             @if(isset($prods))
-                <table class="table table-bordered table-hover">
+                <table class="table table-bordered table-hover" id="tabelaProdutos">
                     <thead>
                     <tr>
                         <th>Nome</th>
@@ -14,6 +14,8 @@
                         <th>Ações</th>
                     </tr>
                     </thead>
+                    <tbody>
+                    </tbody>
                 </table>
             @endif
         </div>
@@ -82,9 +84,17 @@
             $('#dlgProdutos').modal('show')
         }
 
-        function chamarCategorias() {
-            $.getJSON('api/categorias', function (data) {
-                console.log(data)
+        function carregarProdutos() {
+            $.getJSON('/api/produtos', function (data) {
+                for (let i = 0; i < data.length; i++) {
+                    linha = montarLinha(data[i]);
+                    $('#tabelaProdutos>tbody').append(linha);
+                }
+            })
+        }
+
+        function carregarCategorias() {
+            $.getJSON('/api/categorias', function (data) {
                 for (let i = 0; i < data.length; i++) {
                     opcao = "<option value='" + data.id + "'>" + data[i].name + "</option>";
                     $('#categoriaProduto').append(opcao);
@@ -92,8 +102,23 @@
             })
         }
 
-        $(function(){
-            chamarCategorias();
+        function montarLinha(produto) {
+            var linha = "<tr>" +
+                "<td>" + produto.nome + "</td>" +
+                "<td>" + produto.estoque + "</td>" +
+                "<td>" + produto.preco + "</td>" +
+                "<td>" + produto.categoria_id + "</td>" +
+                "<td>"+
+                    '<a href="/produtos/editar/'+produto.id+'" class="btn btn-sm btn-primary">Editar</a>' +
+                    '<a href="/produtos/apagar/'+produto.id+'" class="btn btn-sm btn-danger">Deletar</a>' +
+                "</td>"
+                "</tr>";
+            return linha;
+        }
+
+        $(function () {
+            carregarCategorias()
+            carregarProdutos()
         })
     </script>
 @endsection
