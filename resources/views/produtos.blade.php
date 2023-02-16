@@ -75,6 +75,12 @@
 @endsection
 @section('javascript')
     <script>
+        $.ajaxSetup({
+            headers : {
+                'X-CSRF-TOKEN':"{{csrf_token()}}"
+            }
+        });
+
         function novoProduto() {
             $('#categoriaProduto').val('')
             $('#quantidadeProduto').val('')
