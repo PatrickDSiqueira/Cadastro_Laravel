@@ -76,8 +76,8 @@
 @section('javascript')
     <script>
         $.ajaxSetup({
-            headers : {
-                'X-CSRF-TOKEN':"{{csrf_token()}}"
+            headers: {
+                'X-CSRF-TOKEN': "{{csrf_token()}}"
             }
         });
 
@@ -102,7 +102,7 @@
         function carregarCategorias() {
             $.getJSON('/api/categorias', function (data) {
                 for (let i = 0; i < data.length; i++) {
-                    opcao = "<option value='" + data.id + "'>" + data[i].name + "</option>";
+                    opcao = '<option value="'+ data[i].id +'">' + data[i].name + '</option>';
                     $('#categoriaProduto').append(opcao);
                 }
             })
@@ -114,14 +114,31 @@
                 "<td>" + produto.estoque + "</td>" +
                 "<td>" + produto.preco + "</td>" +
                 "<td>" + produto.categoria_id + "</td>" +
-                "<td>"+
-                    '<a href="/produtos/editar/'+produto.id+'" class="btn btn-sm btn-primary">Editar</a>' +
-                    '<a href="/produtos/apagar/'+produto.id+'" class="btn btn-sm btn-danger">Deletar</a>' +
+                "<td>" +
+                '<a href="/produtos/editar/' + produto.id + '" class="btn btn-sm btn-primary">Editar</a>' +
+                '<a href="/produtos/apagar/' + produto.id + '" class="btn btn-sm btn-danger">Deletar</a>' +
                 "</td>"
-                "</tr>";
+            "</tr>";
             return linha;
         }
 
+        function criarProduto() {
+            prod = {
+                nome: $("#nomeProduto").val(),
+                preco: $("#precoProduto").val(),
+                estoque: $("#quantidadeProduto").val(),
+                categoria_id: $("#categoriaProduto").val()
+            }
+            $.post("/api/produtos",prod,function (data){
+                console.log(data)
+            })
+        }
+
+        $("#formProduto").submit(function (event) {
+            event.preventDefault()
+            criarProduto()
+            $("#dlgProdutos").modal('hide');
+        })
         $(function () {
             carregarCategorias()
             carregarProdutos()
