@@ -15,7 +15,7 @@ class ControladorProduto extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function indexView()
     {
         $cats = Categoria::all();
         $prods = Produto::all();
@@ -117,9 +117,9 @@ class ControladorProduto extends Controller
         }
         return redirect('/produtos');
     }
-    public function indexJSON()
+    public function index()
     {
         $prods = Produto::all();
-        return json_encode($prods);
+        return $prods->toJson();
     }
 }
