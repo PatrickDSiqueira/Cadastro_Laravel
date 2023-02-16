@@ -58,7 +58,12 @@ class ControladorProduto extends Controller
      */
     public function show($id)
     {
-        //
+
+        $prod = Produto::find($id);
+        if (isset($prod)){
+            return json_encode($prod);
+        }
+        return response('Produto não encontrado',404);
     }
 
     /**
@@ -69,13 +74,6 @@ class ControladorProduto extends Controller
      */
     public function edit($id)
     {
-        $cats = Categoria::all();
-        $prod = Produto::find($id);
-        if (isset($prod)) {
-            return view('editarproduto', compact('prod', 'cats'));
-        } else {
-            return redirect('/produtos');
-        }
     }
 
     /**
@@ -87,18 +85,16 @@ class ControladorProduto extends Controller
      */
     public function update(Request $request, $id)
     {
-        $nameCategoria = $request->input('selecaoCategoria');
-        $categoriaModel = new Categoria();
         $prod = Produto::find($id);
-
         if (isset($prod)) {
-            $prod->nome = $request->input('nomeProduto');
-            $prod->estoque = $request->input('quantidadeEstoque');
-            $prod->preco = $request->input('valor');
-            $prod->categoria_id = $categoriaModel->getIdCatedoriaByName($nameCategoria);
+            $prod->nome = $request->input('nome');
+            $prod->preco = $request->input('preco');
+            $prod->estoque = $request->input('estoque');
+            $prod->categoria_id= $request->input('categoria_id');
             $prod->save();
+            return json_encode($prod);
         }
-        return redirect('produtos');
+        return response('Produto não encontrado',404);
     }
 
     /**
