@@ -110,18 +110,41 @@
         }
 
         function montarLinha(produto) {
-            var linha = "<tr>" +
-                "<td>" + produto.id + "</td>" +
-                "<td>" + produto.nome + "</td>" +
-                "<td>" + produto.estoque + "</td>" +
-                "<td>" + produto.preco + "</td>" +
-                "<td>" + produto.categoria_id + "</td>" +
-                "<td>" +
-                '<a href="/produtos/editar/' + produto.id + '" class="btn btn-sm btn-primary">Editar</a>' +
-                '<a href="/produtos/apagar/' + produto.id + '" class="btn btn-sm btn-danger">Deletar</a>' +
-                "</td>"
-            "</tr>";
+            var linha =
+                "<tr>" +
+                    "<td>" + produto.id + "</td>" +
+                    "<td>" + produto.nome + "</td>" +
+                    "<td>" + produto.estoque + "</td>" +
+                    "<td>" + produto.preco + "</td>" +
+                    "<td>" + produto.categoria_id + "</td>" +
+                    "<td>" +
+                        '<button class="btn btn-sm btn-primary" onClick="editar('+produto.id+')">Editar</button>' +
+                        '<button class="btn btn-sm btn-danger" onClick="remover('+produto.id+')">Deletar</button>' +
+                    "</td>"
+                "</tr>";
             return linha;
+        }
+
+        function remover(id){
+            $.ajax({
+                type : "DELETE",
+                url : "/api/produtos/"+id,
+                context: this,
+                success:function (){
+                    linhas = $('#tabelaProdutos>tbody>tr');
+                    e = linhas.filter(function (i, elemento){
+                        return elemento.cells[0].textContent == id;
+                    });
+                    if (e){
+                        e.remove();
+                    }
+            },
+                error : function (error){
+                    console.log(error);
+                }
+
+
+            })
         }
 
         function criarProduto() {

@@ -110,10 +110,12 @@ class ControladorProduto extends Controller
     public function destroy($id)
     {
         $prod = Produto::find($id);
+
         if (isset($prod)) {
             $prod->delete();
+            return response('ok',200);
         }
-        return redirect('/produtos');
+            return response('Produto não encontrado',404);
     }
     public function index()
     {
