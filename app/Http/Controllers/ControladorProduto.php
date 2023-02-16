@@ -41,15 +41,13 @@ class ControladorProduto extends Controller
      */
     public function store(Request $request)
     {
-        $categoriaModel = new Categoria();
-        $nameCategoria = $request->input("selecaoCategoria");
-
-        Produto::create([
-            "nome" => $request->input('nomeProduto'),
-            "estoque" => $request->input('quantidadeEstoque'),
-            "preco" => $request->input('valor'),
-            "categoria_id" => $categoriaModel->getIdCatedoriaByName($nameCategoria)]);
-        return redirect('/produtos');
+        $prod = new Produto();
+        $prod->nome = $request->input('nome');
+        $prod->preco = $request->input('preco');
+        $prod->estoque = $request->input('estoque');
+        $prod->categoria_id= $request->input('categoria_id');
+        $prod->save();
+        return json_encode($prod);
     }
 
     /**
