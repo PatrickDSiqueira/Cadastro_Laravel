@@ -18,7 +18,9 @@
             @endif
         </div>
         <div class="card-footer">
-            <button href="/produtos/novo" class="btn btn-sm btn-primary" role="button" onclick="novoProduto()">Novo Produto</button>
+            <button href="/produtos/novo" class="btn btn-sm btn-primary" role="button" onclick="novoProduto()">Novo
+                Produto
+            </button>
         </div>
     </div>
 
@@ -62,7 +64,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary btn">Salvar</button>
-                        <button type="cancel" class="btn btn-secondary btn">Cancelar</button>
+                        <a type="cancel" href="/produtos" class="btn btn-secondary btn">Cancelar</a>
                     </div>
                 </form>
             </div>
@@ -71,7 +73,7 @@
 @endsection
 @section('javascript')
     <script>
-        function novoProduto(){
+        function novoProduto() {
             $('#categoriaProduto').val('')
             $('#quantidadeProduto').val('')
             $('#precoProduto').val('')
@@ -79,5 +81,19 @@
             $('#nomeProduto').val('')
             $('#dlgProdutos').modal('show')
         }
+
+        function chamarCategorias() {
+            $.getJSON('api/categorias', function (data) {
+                console.log(data)
+                for (let i = 0; i < data.length; i++) {
+                    opcao = "<option value='" + data.id + "'>" + data[i].name + "</option>";
+                    $('#categoriaProduto').append(opcao);
+                }
+            })
+        }
+
+        $(function(){
+            chamarCategorias();
+        })
     </script>
 @endsection

@@ -117,4 +117,9 @@ class ControladorProduto extends Controller
         }
         return redirect('/produtos');
     }
+    public function indexJSON()
+    {
+        $prods = Produto::all();
+        return json_encode($prods);
+    }
 }
