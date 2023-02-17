@@ -210,7 +210,9 @@
                 context: this,
                 data: prod,
                 success:function (data){
-                    var linhas = $('#tabelaProdutos')
+                    var linhas = $('#tabelaProdutos>tbody>tr');
+                    e = linhas.filter(function (i, e){
+                        return e.cells[0].textContent == prod.id;});
                     if (e){
                         e[0].cells[0].textContent = prod.id;
                         e[0].cells[1].textContent = prod.nome;
